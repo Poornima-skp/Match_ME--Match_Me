@@ -63,6 +63,7 @@ body {
 
 .card-face:hover {
     cursor: pointer;
+   
 }
 
 .card.visible .card-back {
@@ -83,7 +84,7 @@ body {
     transform: rotateY(0);
 }
 
-.spider {
+.match-me-happy {
     transition: transform 100ms ease-in-out;
     transform: translateY(-10px);
 }
@@ -109,6 +110,10 @@ img {
     height: 150px;
 }
 
+img:hover{
+    transform: rotateY(360deg);
+}
+
 .overlay-text {
     top: 0;
     left: 0;
@@ -120,6 +125,8 @@ img {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    cursor: pointer;
+    font-size:10em;
     color: #FF6D00;
     font-family: serif;
     transition: background-color 500ms, font-size 500ms;

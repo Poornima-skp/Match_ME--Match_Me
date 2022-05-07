@@ -28,15 +28,22 @@ class MatchMe {
             this.timer.innerText = this.timeRemaining;
             if (this.timeRemaining === 0)
                 this.gameOver();
+                
         }, 1000);
     }
     gameOver() {
+        
         clearInterval(this.countdown);
-        document.getElementById('game-over-text').classList.add('visible');
+         window.location.href = "lost.html"     
+
     }
     victory() {
         clearInterval(this.countdown);
-        document.getElementById('victory-text').classList.add('visible');
+        window.location.href = "won.html"
+
+        // document.getElementById('won-text').classList.add('visible');
+
+
     }
     hideCards() {
         this.cardsArray.forEach(card => {
@@ -106,7 +113,7 @@ if (document.readyState == 'loading') {
 function ready() {
     let overlays = Array.from(document.getElementsByClassName('overlay-text'));
     const cards = Array.from(document.getElementsByClassName('card'));
-    const game = new MatchMe(100, cards);
+    const game = new MatchMe(60, cards);
 
     overlays.forEach(overlay => {
         overlay.addEventListener('click', () => {
@@ -121,3 +128,5 @@ function ready() {
         });
     });
 }
+
+
