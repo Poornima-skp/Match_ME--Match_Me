@@ -28,13 +28,13 @@ class MatchMe {
             this.timer.innerText = this.timeRemaining;
             if (this.timeRemaining === 0)
                 this.gameOver();
-                
+
         }, 1000);
     }
     gameOver() {
-        
+
         clearInterval(this.countdown);
-         window.location.href = "lost.html"     
+        window.location.href = "lost.html"
 
     }
     victory() {
@@ -88,7 +88,7 @@ class MatchMe {
             this.busy = false;
         }, 1000);
     }
-    shuffleCards(cardsArray) { 
+    shuffleCards(cardsArray) {
         for (let i = cardsArray.length - 1; i > 0; i--) {
             let randIndex = Math.floor(Math.random() * (i + 1));
             cardsArray[randIndex].style.order = i;

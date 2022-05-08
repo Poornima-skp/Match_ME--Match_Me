@@ -1,0 +1,28 @@
+.two-player {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.right-container {
+    display: none;
+}
+
+.left-container{
+    display: flex;
+}
+
+.overlay-text.one {
+    display: flex;
+    animation: overlay-grow 500ms forwards;
+}
+
+.overlay-text.two {
+    display: none;
+    animation: overlay-grow 500ms forwards;
+}
+
+h3{
+    font-size: 35px;
+    color: rgb(226, 118, 125);
+}

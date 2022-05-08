@@ -1,5 +1,5 @@
 h3{
-    color: blue;
+    color: rgb(201, 227, 73);
     text-align: center;
 }
 
@@ -16,8 +16,8 @@ h3{
 }
 
 button{
-    background-color: rgb(167, 115, 216);
-    color: blue;
+    background-color: rgb(216, 176, 115);
+    color: rgb(235, 54, 144);
     padding: 10px;
     margin: 50px;
     width: 150px;

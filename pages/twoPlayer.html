@@ -7,26 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Match-Me-Happy</title>
     <link rel="stylesheet" href="../css/game.css">
-    <script src="../script.js" async></script>
+    <link rel="stylesheet" href="../css/twoPlayer.css">
+    <script src="../js-files/two-player.js" defer></script>
 </head>
 
 <body>
 
     <h1 class="page-title">Match-Me-Happy</h1>
-    <div class="overlay-text visible">
-        Click to Start
+    <div class="overlay-text one" id="player1">
+        Click to Start Player 1
     </div>
-    <div id="game-over-text" class="overlay-text">
+    <div class="overlay-text two" id="player2">
+        Click to Start Player 2
+    </div>
+    <!-- <div id="game-over-text" class="overlay-text">
         Time Out!! You Lost
         <span class="overlay-text-small">Click to Restart</span>
     </div>
     <div id="victory-text" class="overlay-text">
         VICTORY
         <span class="overlay-text-small">Click to Restart</span>
-    </div>
+    </div> -->
     <div class="two-player">
-        <div class="left-container">
+        <div class="left-container" id ="black-out-left">
             <div class="game-container">
+                    <h3>Player 1</h3>
+
                 <div class="game-info-container">
                     <div class="game-info">
                         Time <span id="time-remaining">60</span>
@@ -197,8 +203,10 @@
                 </div>
             </div>
         </div>
-        <div class="right-container">
+        <div class="right-container" id ="black-out-right">
             <div class="game-container">
+                    <h3>Player 2</h3>
+
                 <div class="game-info-container">
                     <div class="game-info">
                         Time <span id="time-remaining">60</span>

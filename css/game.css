@@ -4,17 +4,19 @@
 
 html {
     min-height: 100vh;
-    font-family: serif;
+    background-image: url('../giphy/twinkling-stars.gif');
+    font-family: 'Brush Script MT', cursive;
+    
 }
 
 body {
     margin: 0;
-    background: radial-gradient(#b4f0f0, #035c59);
+    /* background: radial-gradient(#b4f0f0, #035c59); */
 }
 
 .page-title {
-    color: #B22222;
-    font-family: serif;
+    color: #e0dfed;
+    /* font-family: 'Brush Script MT', cursive; */
     font-weight: normal;
     text-align: center;
     font-size: 6em;
@@ -27,7 +29,7 @@ body {
 }
 
 .game-info {
-    color: #191970;
+    color: #70036b;
     font-size: 4em;
 }
 
@@ -127,8 +129,8 @@ img:hover{
     flex-direction: column;
     cursor: pointer;
     font-size:10em;
-    color: #FF6D00;
-    font-family: serif;
+    color: #af0f0f;
+    font-family: 'Brush Script MT', cursive;
     transition: background-color 500ms, font-size 500ms;
 }
 
@@ -136,8 +138,9 @@ img:hover{
     font-size: .3em;
 }
 
-.overlay-text.visible {
+
+.overlay-text.visible{
     display: flex;
     animation: overlay-grow 500ms forwards;
+    
 }
-
