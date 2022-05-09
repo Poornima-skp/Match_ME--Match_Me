@@ -1,7 +1,7 @@
 # Title: 
 #Match_ME-Happy.github.io
 # Description:
-#This is a Memory Game with load of fun colors and it helps you with lightning fast memory. This game increases brain activity while having enjoyable interior.
+#This is a Memory Game with load of fun colors and it helps you with lightning fast memory. This game increases brain activity.
 I made this project as an assignment for my BootCamp. During the process of coding this game, I fell in love with it, that I tried to one up myself each day. 
 Of course every new addition came with some challenges which I googled and tried to figure it out. This being my very first project has helped me learn a lot and get even more hooked in coding.
 #This game can be played in a "Single Player" or a "Two Player" mode.
