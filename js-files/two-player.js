@@ -1,3 +1,34 @@
+class AudioController {
+    constructor() {
+        this.bgMusic = new Audio('../Attachments/Audio/game-audio.mp3');
+        this.flipSound = new Audio('../Attachments/Audio/flip.wav');
+        // this.wonSound = new Audio('../Audio/won-music.m4a');
+        // this.lostSound = new Audio('../Audio/lost-music.m4a');
+
+        this.bgMusic.volume = 0.7;
+        this.bgMusic.loop = true;
+    }
+    startMusic() {
+        this.bgMusic.play();
+    }
+    stopMusic() {
+        this.bgMusic.pause();
+        this.bgMusic.currentTime = 0;
+    }
+    flip() {
+        this.flipSound.play();
+    }
+    victory() {
+        this.stopMusic();
+        // this.wonSound.play();
+    }
+    gameOver() {
+        this.stopMusic();
+        // this.lostSound.play();
+    }
+}
+
+
 class MatchMe {
     constructor(totalTime, cards) {
         this.cardsArray = cards;
@@ -5,6 +36,8 @@ class MatchMe {
         this.timeRemaining = totalTime;
         this.timer = document.getElementById('time-remaining')
         this.ticker = document.getElementById('flips');
+        this.audioController = new AudioController();
+
     }
 
     startGame() {
@@ -14,6 +47,7 @@ class MatchMe {
         this.matchedCards = [];
         this.busy = true;
         setTimeout(() => {
+            this.audioController.startMusic();
             this.shuffleCards(this.cardsArray);
             this.countdown = this.startCountdown();
             this.busy = false;
@@ -29,8 +63,8 @@ class MatchMe {
             if (this.timeRemaining === 0) {
                 // this.nextPlayer();
                 right.style.display = 'flex'
-                left.style.display = 'none'
-                // ready();
+                // left.style.display = 'none'
+                ready();
             }
         }, 1000);
     }
@@ -53,6 +87,7 @@ class MatchMe {
     }
     flipCard(card) {
         if (this.canFlipCard(card)) {
+            this.audioController.flip();
             this.totalClicks++;
             this.ticker.innerText = this.totalClicks;
             card.classList.add('visible');
@@ -104,14 +139,6 @@ class MatchMe {
     }
 }
 
-// if (document.readyState == 'loading') {
-//     document.addEventListener('DOMContentLoaded', ready);
-// } else {
-//     ready();
-// }
-
-
-
 const overlays = Array.from(document.getElementsByClassName('overlay-text'));
 const cards = Array.from(document.getElementsByClassName('card'));
 const right = document.getElementById('black-out-right');
@@ -124,23 +151,24 @@ ready();
 function ready() {
 
     overlays.forEach(overlay => {
-        if (right.style.display = 'none') {
-            overlay.addEventListener('click', () => {
+
+        overlay.addEventListener('click', () => {
+            if (right.style.display = 'none') {
                 overlay.classList.remove('one');
-                playerOne.startGame()
-            })
-        }
-        else if (right.style.display = 'flex') {
-            overlay.addEventListener('click', () => {
+                playerOne.startGame();
+
+            } else if (right.style.display = 'flex') {
                 overlay.classList.remove('two');
+                left.style.display = 'none'
+
                 // left.style.visibility = 'collapse'
                 // right.style.visibility = 'visible'
                 playerTwo.startGame()
-            })
-        } else {
-            winner();
-        }
-    })
+            } else {
+                winner();
+            }
+        });
+    });
 
     function winner() {
         if (playerOne.timeRemaining > playerTwo.timeRemaining) {
