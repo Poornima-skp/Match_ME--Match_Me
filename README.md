@@ -23,7 +23,7 @@ Star this repository
 Wait for Pull Request to merge
 Celebrate, your first step into the open Source World and contribute more
 # Link To Website
-#https://match-me-happy.netlify.app/pages/twoplayer
+#https://match-me-happy.netlify.app
 # Resourses Used:
 #MDN JavaScript Docs
 #W3 Schools
