@@ -26,13 +26,13 @@ Celebrate, your first step into the open Source World and contribute more\
 # Link To Website
 #https://match-me-happy.netlify.app
 # Resourses Used:
-#MDN JavaScript Docs
-#W3 Schools
-#CodePen
-#StackOverflow
-#FreeCodeCamp
-#Web Dev Simplified
-#Port Exe
+#MDN JavaScript Docs\
+#W3 Schools\
+#CodePen\
+#StackOverflow\
+#FreeCodeCamp\
+#Web Dev Simplified\
+#Port Exe\
 # Future Plans
 #Giving the game muliple levels from easy to medium to hard\
 #Planning on animating and making the matched cards disappear
