@@ -7,7 +7,7 @@ Single player mode is won by finishing the game within the given time limit\
 In two player mode, whichever player finishes with the most time left wins.
 # Technology Used:
 #HTML\
-#CSS
+#CSS\
 #JavaScript
 # Challenges Faced:
 #Reprograming the sigle player game concept to a two player.\
