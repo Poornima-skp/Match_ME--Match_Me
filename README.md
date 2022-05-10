@@ -34,4 +34,5 @@ Celebrate, your first step into the open Source World and contribute more\
 #Web Dev Simplified
 #Port Exe
 # Future Plans
+#Giving the game muliple levels from easy to medium to hard\
 #Planning on animating and making the matched cards disappear
