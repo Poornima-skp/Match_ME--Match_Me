@@ -1,10 +1,9 @@
+//  Setting up a class to get the audio and creating methods for when to play and stop music
+
 class AudioController {
     constructor() {
         this.bgMusic = new Audio('../Attachments/Audio/game-audio.mp3');
         this.flipSound = new Audio('../Attachments/Audio/flip.wav');
-        // this.wonSound = new Audio('../Audio/won-music.m4a');
-        // this.lostSound = new Audio('../Audio/lost-music.m4a');
-
         this.bgMusic.volume = 0.7;
         this.bgMusic.loop = true;
     }
@@ -20,15 +19,13 @@ class AudioController {
     }
     victory() {
         this.stopMusic();
-        // this.wonSound.play();
     }
     gameOver() {
         this.stopMusic();
-        // this.lostSound.play();
     }
 }
 
-
+// Creating a class to start and implement the actions for the game 
 
 class MatchMe {
     constructor(totalTime, cards) {
@@ -40,6 +37,8 @@ class MatchMe {
         this.audioController = new AudioController();
 
     }
+
+//  Method to Start the Game
 
     startGame() {
         this.totalClicks = 0;
@@ -57,6 +56,9 @@ class MatchMe {
         this.timer.innerText = this.timeRemaining;
         this.ticker.innerText = this.totalClicks;
     }
+
+//  Method to calculate the time taken for the game by counting down from the allocated time limit
+
     startCountdown() {
         return setInterval(() => {
             this.timeRemaining--;
@@ -66,6 +68,9 @@ class MatchMe {
 
         }, 1000);
     }
+
+//  A Game Over method to be called if not able to complete within the given time frame
+
     gameOver() {
 
         clearInterval(this.countdown);
@@ -73,21 +78,26 @@ class MatchMe {
         window.location.href = "lost.html"
 
     }
+
+//  A Victory method to be called if matched all the cards within the given time frame
+
     victory() {
         clearInterval(this.countdown);
         this.audioController.victory();
         window.location.href = "won.html"
-
-        // document.getElementById('won-text').classList.add('visible');
-
-
     }
+
+// Rule applied to hide the cards if the selected cards do not match
+
     hideCards() {
         this.cardsArray.forEach(card => {
             card.classList.remove('visible');
             card.classList.remove('matched');
         });
     }
+
+// Checking if the fliped cards match along with addind the number of clicks
+
     flipCard(card) {
         if (this.canFlipCard(card)) {
             this.audioController.flip();
@@ -126,6 +136,9 @@ class MatchMe {
             this.busy = false;
         }, 1000);
     }
+
+// Shuffling the cards to display for the game
+
     shuffleCards(cardsArray) {
         for (let i = cardsArray.length - 1; i > 0; i--) {
             let randIndex = Math.floor(Math.random() * (i + 1));
@@ -142,11 +155,9 @@ class MatchMe {
     }
 }
 
-if (document.readyState == 'loading') {
-    document.addEventListener('DOMContentLoaded', ready);
-} else {
-    ready();
-}
+// Calling the function ready to invoke the game and is started with an on click event inside the function
+
+ ready();
 
 function ready() {
     let overlays = Array.from(document.getElementsByClassName('overlay-text'));
@@ -160,6 +171,7 @@ function ready() {
         });
     });
 
+//  For each card click the flipCard method is called to check
     cards.forEach(card => {
         card.addEventListener('click', () => {
             game.flipCard(card);

@@ -1,6 +1,20 @@
 .two-player {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+}
+
+.second-player {
+    display: none;
+}
+
+.first-player.visible {
+    display: flex;
+
+}
+
+.second-player.visible {
+
+    display: flex;
 }
 
 
@@ -8,7 +22,7 @@
     display: none;
 }
 
-.left-container{
+.left-container {
     display: flex;
 }
 
@@ -17,12 +31,48 @@
     animation: overlay-grow 500ms forwards;
 }
 
-.overlay-text.two {
-    display: none;
-    animation: overlay-grow 500ms forwards;
+.player-one-card,
+.player-two-card {
+    position: relative;
+    height: 175px;
+    width: 125px;
 }
 
-h3{
+.player-one-card.visible .card-back {
+    transform: rotateY(-180deg);
+}
+
+.player-one-card.visible .card-front {
+    transform: rotateY(0);
+}
+
+.player-one-card.matched .card-front .card-value {
+    animation: dance 1s linear infinite 500ms;
+}
+
+.player-two-card.visible .card-back {
+    transform: rotateY(-180deg);
+}
+
+.player-two-card.visible .card-front {
+    transform: rotateY(0);
+}
+
+.player-two-card.matched .card-front .card-value {
+    animation: dance 1s linear infinite 500ms;
+}
+
+
+
+
+/* .overlay-text.two {
+    display: none;
+    animation: overlay-grow 500ms forwards;
+}  */
+
+h3 {
     font-size: 35px;
     color: rgb(226, 118, 125);
 }
+
+

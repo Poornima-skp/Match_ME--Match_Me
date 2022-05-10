@@ -1,10 +1,10 @@
+
+//  Setting up a class to get the audio and creating methods for when to play and stop music
+
 class AudioController {
     constructor() {
         this.bgMusic = new Audio('../Attachments/Audio/game-audio.mp3');
         this.flipSound = new Audio('../Attachments/Audio/flip.wav');
-        // this.wonSound = new Audio('../Audio/won-music.m4a');
-        // this.lostSound = new Audio('../Audio/lost-music.m4a');
-
         this.bgMusic.volume = 0.7;
         this.bgMusic.loop = true;
     }
@@ -20,14 +20,13 @@ class AudioController {
     }
     victory() {
         this.stopMusic();
-        // this.wonSound.play();
     }
     gameOver() {
         this.stopMusic();
-        // this.lostSound.play();
     }
 }
 
+// Creating a class to start and implement the actions for the game 
 
 class MatchMe {
     constructor(totalTime, cards) {
@@ -39,6 +38,8 @@ class MatchMe {
         this.audioController = new AudioController();
 
     }
+
+    //  Method to Start the Game
 
     startGame() {
         this.totalClicks = 0;
@@ -56,35 +57,43 @@ class MatchMe {
         this.timer.innerText = this.timeRemaining;
         this.ticker.innerText = this.totalClicks;
     }
+
+    //  Method to calculate the time taken for the game by counting down from the allocated time limit
+
     startCountdown() {
         return setInterval(() => {
             this.timeRemaining--;
             this.timer.innerText = this.timeRemaining;
             if (this.timeRemaining === 0) {
-                // this.nextPlayer();
-                right.style.display = 'flex'
-                // left.style.display = 'none'
-                ready();
+                this.gameOver();
             }
         }, 1000);
     }
-    // nextPlayer() {
-    // clearInterval(this.countdown);
-    // document.getElementById('player2').style.display='flex';
-    // ready();
-    // }
-    // winner() {
-    // clearInterval(this.countdown);
 
-    // document.getElementById('won-text').classList.add('visible');
+    gameOver() {
 
-    // }
+        clearInterval(this.countdown);
+        this.audioController.gameOver();
+        ready();
+    }
+
+    victory() {
+        clearInterval(this.countdown);
+        this.audioController.gameOver();
+        ready();
+    }
+
+    // Rule applied to hide the cards if the selected cards do not match
+
     hideCards() {
         this.cardsArray.forEach(card => {
             card.classList.remove('visible');
             card.classList.remove('matched');
         });
     }
+
+    // Checking if the fliped cards match along with addind the number of clicks
+
     flipCard(card) {
         if (this.canFlipCard(card)) {
             this.audioController.flip();
@@ -112,9 +121,12 @@ class MatchMe {
         this.matchedCards.push(card2);
         card1.classList.add('matched');
         card2.classList.add('matched');
-        if (this.matchedCards.length === this.cardsArray.length)
-            ready();
+
+        if (this.matchedCards.length === this.cardsArray.length) {
+            this.victory();
+        }
     }
+
     cardMismatch(card1, card2) {
         this.busy = true;
         setTimeout(() => {
@@ -123,6 +135,9 @@ class MatchMe {
             this.busy = false;
         }, 1000);
     }
+
+    // Shuffling the cards to display for the game
+
     shuffleCards(cardsArray) {
         for (let i = cardsArray.length - 1; i > 0; i--) {
             let randIndex = Math.floor(Math.random() * (i + 1));
@@ -134,58 +149,78 @@ class MatchMe {
         return card.getElementsByClassName('card-value')[0].src;
     }
     canFlipCard(card) {
-        // return true;
+
         return !this.busy && !this.matchedCards.includes(card) && card !== this.cardToCheck;
     }
 }
 
 const overlays = Array.from(document.getElementsByClassName('overlay-text'));
-const cards = Array.from(document.getElementsByClassName('card'));
-const right = document.getElementById('black-out-right');
-const left = document.getElementById('black-out-left');
+const cards = Array.from(document.getElementsByClassName('player-one-card'));
+const player1 = document.getElementById("first-player");
+// console.log(player1)
+const player2 = document.getElementById("second-player");
+// console.log(player2)
 
-const playerOne = new MatchMe(10, cards);
-const playerTwo = new MatchMe(10, cards);
+const playerOne = new MatchMe(90, cards);
+const playerTwo = new MatchMe(90, cards);
+
+let i = 0;
+
+// Calling the function ready to invoke the game and is started with an on click event inside the function
+
 
 ready();
 function ready() {
 
-    overlays.forEach(overlay => {
+    if (i === 0) {
+        overlays[i].addEventListener('click', () => {
+            overlays[i].classList.remove('one');
+            i++;
+            document.getElementById('first-player').classList.add('visible');
+            playerOne.startGame();
 
-        overlay.addEventListener('click', () => {
-            if (right.style.display = 'none') {
-                overlay.classList.remove('one');
-                playerOne.startGame();
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    playerOne.flipCard(card);
+                });
+            });
+        })
+    } else if (i === 1) {
+        // overlay.classList.add = 'visible';
+        document.getElementById('player-two').classList.add('visible');
 
-            } else if (right.style.display = 'flex') {
-                overlay.classList.remove('two');
-                left.style.display = 'none'
+        overlays[i].addEventListener('click', () => {
+            overlays[i].style.display = 'none';
+            player1.style.display = 'none';
+            player2.style.display = 'flex';
+            // document.getElementById('first-player').classList.remove('visible');
+            // document.getElementById('second-player').classList.add('visible');
 
-                // left.style.visibility = 'collapse'
-                // right.style.visibility = 'visible'
-                playerTwo.startGame()
-            } else {
-                winner();
-            }
-        });
-    });
+            i++;
+            playerTwo.startGame();
+
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    playerTwo.flipCard(card);
+                });
+            });
+        })
+
+    } else {
+        winner();
+    }
 
     function winner() {
         if (playerOne.timeRemaining > playerTwo.timeRemaining) {
-            document.write(`Player 1 wins by completing in ${playerOne.timeRemaining}.`);
+            document.write(`Player 1 wins by completing with ${playerOne.timeRemaining} seconds remaining compared to ${playerTwo.timeRemaining}.`);
         } else if (playerTwo.timeRemaining > playerOne.timeRemaining) {
-            document.write(`Player 2 wins by completing in ${playerOne.timeRemaining}.`);
+            document.write(`Player 2 wins by completing with ${playerOne.timeRemaining} seconds remaining compared to ${playerTwo.timeRemaining}.`);
 
+        } else if (playerOne.timeRemaining == playerTwo.timeRemaining) {
+            document.write('Its a DRAW');
         }
     }
 
-
-
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
-            playerOne.flipCard(card);
-        });
-    });
 }
 
 

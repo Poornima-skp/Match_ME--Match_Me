@@ -29,7 +29,7 @@ body {
 }
 
 .game-info {
-    color: #70036b;
+    color: #a870a5;
     font-size: 4em;
 }
 
@@ -129,15 +129,18 @@ img:hover{
     flex-direction: column;
     cursor: pointer;
     font-size:10em;
-    color: #af0f0f;
+    color: #e1de27;
     font-family: 'Brush Script MT', cursive;
     transition: background-color 500ms, font-size 500ms;
 }
 
-.overlay-text-small {
+/* .overlay-text-small {
     font-size: .3em;
-}
+} */
 
+.overlay-text:hover{
+    cursor: pointer;
+}
 
 .overlay-text.visible{
     display: flex;
