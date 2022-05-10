@@ -79,7 +79,7 @@ class MatchMe {
 
     victory() {
         clearInterval(this.countdown);
-        this.audioController.gameOver();
+        this.audioController.victory();
         ready();
     }
 
@@ -108,6 +108,9 @@ class MatchMe {
             }
         }
     }
+
+    // Checking if cards are matched. If matched go to cardmatch pile if not card mismatch pile
+
     checkForCardMatch(card) {
         if (this.getCardType(card) === this.getCardType(this.cardToCheck))
             this.cardMatch(card, this.cardToCheck);
@@ -116,16 +119,18 @@ class MatchMe {
 
         this.cardToCheck = null;
     }
+    // Writing logic to see if all cards are matched to end the game
+
     cardMatch(card1, card2) {
         this.matchedCards.push(card1);
         this.matchedCards.push(card2);
-        card1.classList.add('matched');
-        card2.classList.add('matched');
 
         if (this.matchedCards.length === this.cardsArray.length) {
             this.victory();
         }
     }
+
+    // Writng a rule to Flip the cards back if they are not a match
 
     cardMismatch(card1, card2) {
         this.busy = true;
@@ -148,18 +153,24 @@ class MatchMe {
     getCardType(card) {
         return card.getElementsByClassName('card-value')[0].src;
     }
+
+    // Writing a rule to check if a card can be flipped
+
     canFlipCard(card) {
 
         return !this.busy && !this.matchedCards.includes(card) && card !== this.cardToCheck;
     }
 }
 
+
+// Getting the required elements
+
 const overlays = Array.from(document.getElementsByClassName('overlay-text'));
 const cards = Array.from(document.getElementsByClassName('player-one-card'));
 const player1 = document.getElementById("first-player");
-// console.log(player1)
 const player2 = document.getElementById("second-player");
-// console.log(player2)
+
+// Creating 2 Objects of the class 
 
 const playerOne = new MatchMe(90, cards);
 const playerTwo = new MatchMe(90, cards);
@@ -171,6 +182,8 @@ let i = 0;
 
 ready();
 function ready() {
+
+    // Player 1 starts the game
 
     if (i === 0) {
         overlays[i].addEventListener('click', () => {
@@ -185,16 +198,17 @@ function ready() {
                 });
             });
         })
+
+        //  Player 2 starts the game
+
     } else if (i === 1) {
-        // overlay.classList.add = 'visible';
+
         document.getElementById('player-two').classList.add('visible');
 
         overlays[i].addEventListener('click', () => {
             overlays[i].style.display = 'none';
             player1.style.display = 'none';
             player2.style.display = 'flex';
-            // document.getElementById('first-player').classList.remove('visible');
-            // document.getElementById('second-player').classList.add('visible');
 
             i++;
             playerTwo.startGame();
@@ -210,14 +224,19 @@ function ready() {
         winner();
     }
 
+    // Calculating the winner and displaying results
+
     function winner() {
         if (playerOne.timeRemaining > playerTwo.timeRemaining) {
-            document.write(`Player 1 wins by completing with ${playerOne.timeRemaining} seconds remaining compared to ${playerTwo.timeRemaining}.`);
+
+            document.getElementById('winner').innerText = `Player 1 wins by completing with ${playerOne.timeRemaining} seconds remaining compared to ${playerTwo.timeRemaining} of Player 2.`
+
         } else if (playerTwo.timeRemaining > playerOne.timeRemaining) {
-            document.write(`Player 2 wins by completing with ${playerOne.timeRemaining} seconds remaining compared to ${playerTwo.timeRemaining}.`);
+            document.getElementById('winner') = `Player 2 wins by completing with ${playerTwo.timeRemaining} seconds remaining compared to ${playerOne.timeRemaining} of Player 1.`
 
         } else if (playerOne.timeRemaining == playerTwo.timeRemaining) {
-            document.write('Its a DRAW');
+            document.getElementById('winner').innerText = "Its a DRAW"
+            
         }
     }
 

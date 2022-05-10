@@ -112,6 +112,9 @@ class MatchMe {
             }
         }
     }
+
+    // Checking if cards are matched. If matched go to cardmatch pile if not card mismatch pile
+
     checkForCardMatch(card) {
         if (this.getCardType(card) === this.getCardType(this.cardToCheck))
             this.cardMatch(card, this.cardToCheck);
@@ -120,14 +123,20 @@ class MatchMe {
 
         this.cardToCheck = null;
     }
+
+    // Writing logic to see if all cards are matched to end the game
+
+
     cardMatch(card1, card2) {
         this.matchedCards.push(card1);
         this.matchedCards.push(card2);
-        card1.classList.add('matched');
-        card2.classList.add('matched');
+        
         if (this.matchedCards.length === this.cardsArray.length)
             this.victory();
     }
+
+    // Writng a rule to Flip the cards back if they are not a match
+
     cardMismatch(card1, card2) {
         this.busy = true;
         setTimeout(() => {
